@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./DockerfilePhp
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "9000:9000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./DockerfileNginx
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "1111:80"
+    links:
+      - php
+    depends_on:
+      - php
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+     - ./docker-runtime/postgres:/var/lib/postgresql/data
+    environment:
+     POSTGRES_PASSWORD: password
+     POSTGRES_USER: user
+     POSTGRES_DB: db

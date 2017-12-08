@@ -1,0 +1,8 @@
+FROM php:7.0-fpm
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
+RUN echo "deb http://ftp.de.debian.org/debian stretch main" >> /etc/apt/sources.list \
+    && apt-get update && apt-get install -y \
+    php7.0-pgsql
+EXPOSE 9000
+CMD ["php-fpm", "-R"]

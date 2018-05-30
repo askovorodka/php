@@ -10,7 +10,10 @@ services:
       - .:/var/www/html
     ports:
       - "9000:9000"
-
+    depends_on:
+      - mysql
+    env_file:
+      - .env
   nginx:
     build:
       context: .
@@ -20,12 +23,9 @@ services:
       - .:/var/www/html
     ports:
       - "1111:80"
-    links:
-      - php
-    depends_on:
-      - php
-
-  db:
+    env_file:
+      - .env
+  dbpg:
     image: postgres
     restart: always
     volumes:
@@ -34,3 +34,21 @@ services:
      POSTGRES_PASSWORD: password
      POSTGRES_USER: user
      POSTGRES_DB: db
+
+  mysql:
+    #image: mysql:latest
+    build:
+      context: .
+      dockerfile: ./DockerfileMysql
+    restart: always
+    volumes:
+      - ./docker-runtime/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env

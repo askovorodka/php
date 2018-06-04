@@ -1,0 +1,6 @@
+FROM python:3.6.5-jessie
+RUN mkdir -p /var/www/html
+WORKDIR /var/www/html
+VOLUME /var/www/html
+
+EXPOSE 8000

@@ -28,16 +28,19 @@ class Singleton implements DataBaseIface
         return static::$instance;
     }
 
-    public function connect()
+    public function connect(): \PDO
     {
         try {
-            $pwd = getenv('MYSQL_PASSWORD');
-            $db = getenv('MYSQL_DATABASE');
-            $user = getenv('MYSQL_USER');
 
-            $dsn = "mysql:host=mysql;dbname=$db;charset=utf8";
-            $dbh = new \PDO($dsn, $user,$pwd, ['PDO::ATTR_PERSISTENT' => true]);
-            echo "Connection success to database";
+            $pwd    = getenv('MYSQL_PASSWORD');
+            $db     = getenv('MYSQL_DATABASE');
+            $user   = getenv('MYSQL_USER');
+
+            $dsn    = "mysql:host=mysql;dbname=$db;charset=utf8";
+            $dbh    = new \PDO($dsn, $user, $pwd, ['PDO::ATTR_PERSISTENT' => true]);
+
+            return $dbh;
+
         } catch (\Exception $exception) {
             die($exception->getMessage());
         }

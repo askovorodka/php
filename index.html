@@ -1,0 +1,95 @@
+<html>
+<head>
+    <script type="text/javascript">
+
+        /*(function () {
+            f();
+            function f() {
+                console.log(1);
+            }
+        })()
+        
+        function f() {
+            console.log(2);
+        }
+        f();*/
+
+        /*(function () {
+            var x = 1;
+            function x() {
+                
+            }
+            console.log(x);
+        })()*/
+        /*var obj = {
+            a:1
+        };
+        (function (obj) {
+            obj = {
+                a:2
+            };
+        })(obj)
+        console.log(obj);*/
+
+        /*Logger = function (logFn) {
+            _logFn = logFn;
+            this.log = function (message) {
+                _logFn(new Date() + ":" + message);
+            }
+        }
+        var logger = new Logger(console.log);
+        logger.log("Hi");
+        logger.log("Wazzup");*/
+
+        /*const add = (a) => {
+            //let sum = a;
+
+            const func = (b) => {
+                if (b) {
+                    a += b;
+                    return func;
+                } else {
+                    return a;
+                }
+            };
+
+            return func;
+        };
+
+        console.log(add(5)());*/
+
+        /*for (var i=0; i<10; i++) {
+            console.log(i);
+            for (var i=100; i<110; i++) {
+                console.log(i);
+            }
+        }*/
+
+        /*var a={},
+            b={key:'b'},
+            c={key:'c'};
+
+        a[b]=123;
+        a[c]=456;
+
+        console.log(a[b]);*/
+
+        /*function isThreePassed() {
+            console.log(Array.prototype.slice(arguments).indexOf(3));
+        }
+        isThreePassed(1,3);*/
+
+        const arrFunc = (flatm toFlaten) => {
+            arr.reduce((flat, toFlaten) => { flat.concat(Array.isArray(toFlaten) ? arrFunc(toFlaten) : toFlaten)}, []);
+        }
+        const array1 = [1, 2, [1,3,4],5];
+        const array2 = [7,8,9,10];
+
+        arrFunc(array1, array2);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

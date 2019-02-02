@@ -18,6 +18,9 @@ $file = $root . $uri . ".php";
 if (is_file($file)) {
     require_once $file;
 } else {
+    if (!preg_match("/\/$/i", $uri)) {
+        $uri .= "/";
+    }
     $file = $root . $uri . "index.php";
     if (is_file($file)) {
         require_once $file;
